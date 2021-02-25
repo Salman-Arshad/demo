@@ -79,7 +79,8 @@ function upload(key) {
         const readStream = fs.createReadStream(key);
         const pipeline = readStream.pipe(writeStream);
         promise.then((res) => {
-            resolve(res.location);
+            console.log(res)
+            resolve(res);
         });
     });
 }
