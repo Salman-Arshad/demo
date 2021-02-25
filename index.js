@@ -11,35 +11,44 @@ async function main(fileName) {
     //        console.log(data[i][10])
     //    }
     // const show = data[0].data;
-    for (let i = 0; i < 1; i++) {
-        console.log("runnig",i)
+    for (let i = 1; i < 2; i++) {
+        console.log("runnig", i);
         let e = data[i];
         if (e[9]) {
             let url = e[9];
+            console.log(url);
             url = url.substr(0, url.lastIndexOf("0")) + "1";
-            turl = e[10];
-            turl = turl.substr(0, turl.lastIndexOf("0")) + "1";
-
-            await downLoadFile(url, e[1]);
-            console.log("file downloaded")
             if (e[10]) {
-                await downLoadFile(turl, e[i] + ".jpg");
-                console.log("th downloaded")
+                turl = e[10];
+                turl = turl.substr(0, turl.lastIndexOf("0")) + "1";
+            }
+
+            await downLoadFile(url, e[0].toString());
+            console.log("file downloaded");
+            if (e[10]) {
+                await downLoadFile(turl, e[0].toString() + ".jpg");
+                console.log("th downloaded");
             }
             let obj = {};
-            obj.url = await upload(e[1]);
+            obj.url = await upload(e[0].toString());
             if (e[10]) {
-                obj.thumbnail = await upload(e[i] + ".jpg");
+                obj.thumbnail = await upload(e[0].toString() + ".jpg");
             }
-            obj.ott_id = e[0]
-            appendJson(obj)
-            console.log(obj)
-            
+            obj.ott_id = e[0].toString();
+            appendJson(obj);
+            console.log(obj);
         }
     }
 }
-function downLoadFile(uri, fileName) {
-    return Promise((resolve, reject) => {
+function downLoadFile(uri, filename) {
+    console.log(filename)
+    return new Promise((resolve, reject) => {
+        fs.open(filename, "wx", function (err, fd) {
+            // handle error
+            fs.close(fd, function (err) {
+                // handle error
+            });
+        });
         var myFile = request({ uri, encoding: null }).pipe(fs.createWriteStream(filename));
         myFile.on("finish", () => {
             return resolve();
@@ -72,11 +81,17 @@ function upload(key) {
     });
 }
 
-function appendJson(data) {
-    let rawdata = fs.readFileSync("results.json");
-    let student = JSON.parse(rawdata);
-    rawdata.Push(data);
-    fs.writeFileSync(JSON.stringify(rawdata));
+function appendJson(data2) {
+    fs.readFile("results.json", "utf8", function readFileCallback(err, data) {
+        if (err) {
+            console.log(err);
+        } else {
+            obj = JSON.parse(data);
+            obj.push(data2);
+            json = JSON.stringify(obj);
+            fs.writeFile("results.json", json, "utf8", console.log); // write it back
+        }
+    });
 }
 
 //show movie
