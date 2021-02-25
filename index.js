@@ -43,7 +43,7 @@ async function main(fileName) {
 function downLoadFile(uri, filename) {
     console.log(filename)
     return new Promise((resolve, reject) => {
-        fs.open(filename, "wx", function (err, fd) {
+        fs.open(filename, "w+", function (err, fd) {
             // handle error
             fs.close(fd, function (err) {
                 // handle error
