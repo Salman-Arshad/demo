@@ -5,13 +5,14 @@ bluebird = require("bluebird");
 async function main(fileName) {
     let csv = xlsx.parse(`data.xlsx`);
     let data = csv[0].data;
-    console.log(data);
+    // console.log(data);
     // console.log(workSheetsFromFile[0].data);
     //    for(let i=0;i<data.length;i++){
     //        console.log(data[i][10])
     //    }
     // const show = data[0].data;
     for (let i = 0; i < 1; i++) {
+        console.log("runnig",i)
         let e = data[i];
         if (e[9]) {
             let url = e[9];
@@ -20,8 +21,10 @@ async function main(fileName) {
             turl = turl.substr(0, turl.lastIndexOf("0")) + "1";
 
             await downLoadFile(url, e[1]);
+            console.log("file downloaded")
             if (e[10]) {
                 await downLoadFile(turl, e[i] + ".jpg");
+                console.log("th downloaded")
             }
             let obj = {};
             obj.url = await upload(e[1]);
@@ -30,6 +33,7 @@ async function main(fileName) {
             }
             obj.ott_id = e[0]
             appendJson(obj)
+            console.log(obj)
             
         }
     }
