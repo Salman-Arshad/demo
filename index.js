@@ -4,6 +4,7 @@ const AWS = require("aws-sdk");
 const request = require("request");
 const fs = require("fs");
 bluebird = require("bluebird");
+const stream = require('stream');
 async function main(fileName) {
     let csv = xlsx.parse(`data.xlsx`);
     let data = csv[0].data;
