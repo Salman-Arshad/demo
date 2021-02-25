@@ -14,7 +14,7 @@ async function main(fileName) {
     //        console.log(data[i][10])
     //    }
     // const show = data[0].data;
-    for (let i = 8; i < 9; i++) {
+    for (let i = 1; i < data.length; i++) {
         console.log("runnig", i);
         let e = data[i];
         if (e[9]) {
