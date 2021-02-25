@@ -75,7 +75,7 @@ const uploadStream = ({ Bucket, Key }) => {
 
 function upload(key) {
     return new Promise((resolve, reject) => {
-        const { writeStream, promise } = uploadStream({ Bucket: "videos-download", key });
+        const { writeStream, promise } = uploadStream({ Bucket: "videos-download", Key:key });
         const readStream = fs.createReadStream(key);
         const pipeline = readStream.pipe(writeStream);
         promise.then((res) => {
