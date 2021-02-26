@@ -14,7 +14,7 @@ async function main(fileName) {
     //        console.log(data[i][10])
     //    }
     // const show = data[0].data;
-    for (let i = 1; i < data.length; i++) {
+    for (let i = 58; i < data.length; i++) {
         console.log("runnig", i);
         let e = data[i];
         if (e[9]) {
@@ -26,14 +26,14 @@ async function main(fileName) {
                 turl = turl.substr(0, turl.lastIndexOf("0")) + "1";
             }
 
-            await downLoadFile(url, e[0].toString());
+            await downLoadFile(url, e[0].toString()+".mp4");
             console.log("file downloaded");
             if (e[10]) {
                 await downLoadFile(turl, e[0].toString() + ".jpg");
                 console.log("th downloaded");
             }
             let obj = {};
-            obj.url = await upload(e[0].toString());
+            obj.url = await upload(e[0].toString()+".mp4");
             if (e[10]) {
                 obj.thumbnail = await upload(e[0].toString() + ".jpg");
             }
