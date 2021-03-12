@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.851.0",
+    "form-data": "^4.0.0",
+    "node-fetch": "^2.6.1",
     "node-xlsx": "^0.16.1",
     "read-excel-file": "^5.0.0",
     "request": "^2.88.2"
