@@ -106,7 +106,7 @@ function uploadFile(data) {
       headers: { ...form.getHeaders(), Authorization: "Bearer " + token },
     };
 
-    fetch(baseurl + "/creator/videos/add", options).then(resolve());
+    fetch(baseurl + "creator/videos/add", options).then(resolve());
     ///
   });
 }
@@ -125,7 +125,7 @@ function uploadThumbnail(data) {
       headers: { ...form.getHeaders(), Authorization: "Bearer " + token },
     };
 
-    fetch(baseurl + "/creator/thumbnail", options)
+    fetch(baseurl + "thumbnail", options)
       .then((res) => res.json())
       .then((res) => resolve(res.result.url));
     ///
