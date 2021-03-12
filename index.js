@@ -45,7 +45,7 @@ async function main(fileName) {
         let thUrl = await uploadThumbnail(e[0].toString() + ".jpg");
         await uploadFile({key:e[0].toString() + ".mp4",name:e[1],thumbnail:thUrl});
       } else {
-        await uploadVideo({key:e[0].toString() + ".mp4",name:e[1]});
+        await uploadFile({key:e[0].toString() + ".mp4",name:e[1]});
       }
       //////
     //   obj.url = await upload(e[0].toString() + ".mp4");
