@@ -51,7 +51,7 @@ async function main(fileName) {
         fs.unlinkSync(e[0].toString() + ".jpg");
         fs.unlinkSync(e[0].toString() + ".mp4");
       } else {
-        await uploadFile({ key: e[0].toString() + ".mp4", name: e[1] });
+        await uploadFile({ key: e[0].toString() + ".mp4", name: e[1],thumbnail:"https://d48q0hgn6ygcp.cloudfront.net/thumbnails/31I57QYdZFL.png" });
         fs.unlinkSync(e[0].toString() + ".mp4");
       }
       //////
