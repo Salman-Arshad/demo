@@ -43,18 +43,25 @@ async function main(fileName) {
       /////
       if (e[10]) {
         let thUrl = await uploadThumbnail(e[0].toString() + ".jpg");
-        await uploadFile({key:e[0].toString() + ".mp4",name:e[1],thumbnail:thUrl});
+        await uploadFile({
+          key: e[0].toString() + ".mp4",
+          name: e[1],
+          thumbnail: thUrl,
+        });
+        fs.unlinkSync(e[0].toString() + ".jpg");
+        fs.unlinkSync(e[0].toString() + ".mp4");
       } else {
-        await uploadFile({key:e[0].toString() + ".mp4",name:e[1]});
+        await uploadFile({ key: e[0].toString() + ".mp4", name: e[1] });
+        fs.unlinkSync(e[0].toString() + ".mp4");
       }
       //////
-    //   obj.url = await upload(e[0].toString() + ".mp4");
-    //   if (e[10]) {
-    //     obj.thumbnail = await upload(e[0].toString() + ".jpg");
-    //   }
-    //   obj.ott_id = e[0].toString();
-    //   appendJson(obj);
-    //   console.log(obj);
+      //   obj.url = await upload(e[0].toString() + ".mp4");
+      //   if (e[10]) {
+      //     obj.thumbnail = await upload(e[0].toString() + ".jpg");
+      //   }
+      //   obj.ott_id = e[0].toString();
+      //   appendJson(obj);
+      //   console.log(obj);
     }
   }
 }
@@ -91,8 +98,8 @@ main(null);
 // };
 
 function uploadFile(data) {
-  let { key, name, thumbnail } = data;
   return new Promise((resolve, reject) => {
+    let { key, name, thumbnail } = data;
     // const { writeStream, promishttpbine } = uploadStream({ Bucket: "videos-download", Key:key });
     var form = new FormData();
     if (thumbnail) {
@@ -106,11 +113,15 @@ function uploadFile(data) {
       headers: { ...form.getHeaders(), Authorization: "Bearer " + token },
     };
 
-    fetch(baseurl + "creator/videos/add", options).then(resolve());
+    fetch(baseurl + "creator/videos/add", options)
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        resolve();
+      });
     ///
   });
 }
-
 
 function uploadThumbnail(data) {
   // let { key, name, thumbnail } = data;
