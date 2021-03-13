@@ -113,12 +113,12 @@ function uploadFile(data) {
       headers: { ...form.getHeaders(), Authorization: "Bearer " + token },
     };
 
-    fetch(baseurl + "creator/videos/add", options)
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        resolve();
-      });
+    fetch(baseurl + "creator/videos/add", options).then(()=>resolve())
+    //   .then((res) => res.json())
+    //   .then((res) => {
+    //     console.log(res);
+    //     resolve();
+    //   });
     ///
   });
 }
